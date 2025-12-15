@@ -2,7 +2,7 @@ name: Deploy Hugo site to Pages
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "master"]
 
 permissions:
   contents: read
@@ -27,7 +27,9 @@ jobs:
           extended: true
 
       - name: Build
-        run: hugo --minify
+        run: |
+          hugo --minify
+          touch public/.nojekyll
 
       - uses: actions/upload-pages-artifact@v3
         with:
